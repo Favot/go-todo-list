@@ -59,3 +59,7 @@ func (s *TaskService) getNextID() int {
 	}
 	return len(tasks) + 1
 }
+
+func (s *TaskService) DeleteTask(id int) error {
+	return s.repo.DeleteTask(id)
+}

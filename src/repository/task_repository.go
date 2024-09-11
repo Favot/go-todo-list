@@ -9,4 +9,5 @@ type TaskRepository interface {
 	GetAllTasks() ([]*models.Task, error)
 	GetTaskByID(id int) (*models.Task, error)
 	SaveTasks(tasks []*models.Task) error
+	DeleteTask(id int) error
 }

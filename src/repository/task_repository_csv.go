@@ -106,3 +106,17 @@ func (r *CSVTaskRepository) SaveTasks(tasks []*models.Task) error {
 	}
 	return nil
 }
+
+func (r *CSVTaskRepository) DeleteTask(id int) error {
+	tasks, err := r.GetAllTasks()
+	if err != nil {
+		return err
+	}
+	for i, task := range tasks {
+		if task.ID == id {
+			tasks = append(tasks[:i], tasks[i+1:]...)
+			return r.SaveTasks(tasks)
+		}
+	}
+	return nil
+}
