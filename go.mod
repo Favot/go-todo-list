@@ -1,4 +1,4 @@
-module github.com/spf13/go-todo-list
+module go-todo-list
 
 go 1.23.1
 
