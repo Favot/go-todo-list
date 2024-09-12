@@ -120,3 +120,17 @@ func (r *CSVTaskRepository) DeleteTask(id int) error {
 	}
 	return nil
 }
+
+func (r *CSVTaskRepository) SaveTask(task *models.Task) error {
+	tasks, err := r.GetAllTasks()
+	if err != nil {
+		return err
+	}
+	for i, t := range tasks {
+		if t.ID == task.ID {
+			tasks[i] = task
+			return r.SaveTasks(tasks)
+		}
+	}
+	return nil
+}

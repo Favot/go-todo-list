@@ -42,6 +42,17 @@ func (m *MockTaskRepository) DeleteTask(id int) error {
 	}
 	return nil
 }
+
+func (m *MockTaskRepository) SaveTask(task *models.Task) error {
+	for i, t := range m.tasks {
+		if t.ID == task.ID {
+			m.tasks[i] = task
+			return nil
+		}
+	}
+	return nil
+}
+
 func TestGetTaskByID(t *testing.T) {
 	mockRepo := &MockTaskRepository{
 		tasks: []*models.Task{

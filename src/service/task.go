@@ -38,18 +38,12 @@ func (s *TaskService) GetTaskByID(id int) (*models.Task, error) {
 
 func (s *TaskService) CompleteTask(id int) error {
 	task, err := s.repo.GetTaskByID(id)
-	if err != nil {
+	if err != nil || task == nil {
 		return err
 	}
-	if task == nil {
-		return nil
-	}
+
 	task.Completed = true
-	tasks, err := s.repo.GetAllTasks()
-	if err != nil {
-		return err
-	}
-	return s.repo.SaveTasks(tasks)
+	return s.repo.SaveTask(task)
 }
 
 func (s *TaskService) getNextID() int {
